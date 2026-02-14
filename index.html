@@ -119,27 +119,27 @@ video{
 <div class="overlay content" id="content">
   <div id="story"></div>
 </div>
-
 <script>
 const slides = [
-  {img:"varsha.jpg", text:"Some bonds don’t begin by chance — they begin by grace."},
-  {img:"pic1.jpg", text:"Thursday didn’t just happen… it aligned."},
-  {img:"pic2.jpg", text:"Every word, every silence, everything that day felt divinely timed."},
-  {img:"pic3.jpg", text:"If faith had a feeling, it would feel like you."},
-  {img:"pic4.jpg", text:"What started on a Thursday became something my soul remembers."}
+  { img: "varsha.jpg", text: "Some bonds don’t begin by chance — they begin by grace." },
+  { img: "pic1.jpeg", text: "Thursday didn’t just happen… it aligned." },
+  { img: "pic2.jpeg", text: "Every word, every silence, everything that day felt divinely timed." },
+  { img: "pic3.jpeg", text: "If faith had a feeling, it would feel like you." },
+  { img: "varsha.jpg", text: "What started on a Thursday became something my soul remembers." }
 ];
 
 let index = 0;
 const story = document.getElementById("story");
 
-function showSlide(){
-  if(index >= slides.length){
-    story.innerHTML += `<div class="signature fade">— Shambhu</div>`;
+function showSlide() {
+  if (index >= slides.length) {
+    story.innerHTML = <div class="signature fade">— Shambhu</div>;
     return;
   }
+
   const s = slides[index];
   story.innerHTML = `
-    <img class="photo fade" src="${s.img}">
+    <img class="photo fade" src="${s.img}" alt="">
     <div class="quote fade">${s.text}</div>
   `;
   index++;
@@ -147,19 +147,19 @@ function showSlide(){
 }
 
 document.body.onclick = () => {
-  document.getElementById("tapScreen").style.display="none";
-  document.getElementById("content").style.display="flex";
-  document.getElementById("bgVideo").style.display="block";
+  document.getElementById("tapScreen").style.display = "none";
+  document.getElementById("content").style.display = "flex";
+  document.getElementById("bgVideo").style.display = "block";
   document.getElementById("bgVideo").play();
   showSlide();
 
-  setInterval(()=>{
-    const p=document.createElement("div");
-    p.className="particle";
-    p.style.left=Math.random()*100+"%";
+  setInterval(() => {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random() * 100 + "%";
     document.body.appendChild(p);
-    setTimeout(()=>p.remove(),10000);
-  },500);
+    setTimeout(() => p.remove(), 10000);
+  }, 600);
 };
 </script>
 
