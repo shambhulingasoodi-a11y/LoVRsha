@@ -6,7 +6,6 @@
 <title>For Varsha ❤️</title>
 
 <style>
-/* ===== GLOBAL RESET & APPLE FONT ===== */
 *{
   margin:0;
   padding:0;
@@ -30,7 +29,9 @@ video{
   width:100%;
   height:100%;
   object-fit:cover;
-  display:none;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.9;
 }
 
 /* ===== OVERLAY ===== */
@@ -43,6 +44,7 @@ video{
   justify-content:center;
   text-align:center;
   padding:20px;
+  z-index:2;
 }
 
 /* ===== TAP SCREEN ===== */
@@ -61,11 +63,12 @@ video{
 .content{
   display:none;
   max-width:360px;
+  flex-direction:column;
 }
 
 /* ===== FADE + MOTION ===== */
 .fade{
-  animation:fadeUp 2.4s ease;
+  animation:fadeUp 1.8s ease;
 }
 
 @keyframes fadeUp{
@@ -81,12 +84,6 @@ video{
   border-radius:22px;
   margin:20px auto;
   box-shadow:0 15px 45px rgba(0,0,0,.6);
-  animation:zoomIn 3.5s ease;
-}
-
-@keyframes zoomIn{
-  from{transform:scale(.9)}
-  to{transform:scale(1)}
 }
 
 /* ===== TEXT ===== */
@@ -125,8 +122,8 @@ video{
 <body>
 
 <!-- BACKGROUND VIDEO -->
-<video id="bgVideo" loop playsinline muted>
-  <source src="https://cdn.coverr.co/videos/coverr-couple-holding-hands-1576/1080p.mp4">
+<video id="bgVideo" loop playsinline muted autoplay>
+  <source src="https://cdn.coverr.co/videos/coverr-couple-holding-hands-1576/1080p.mp4" type="video/mp4">
 </video>
 
 <!-- TAP SCREEN -->
@@ -140,7 +137,7 @@ video{
 </div>
 
 <script>
-/* ===== SLIDES DATA ===== */
+
 const slides = [
   { img: "varsha.jpg", text: "Some bonds don’t begin by chance — they begin by grace." },
   { img: "pic1.jpeg", text: "Thursday didn’t just happen… it aligned." },
@@ -155,38 +152,36 @@ let started = false;
 const story = document.getElementById("story");
 const tapScreen = document.getElementById("tapScreen");
 const content = document.getElementById("content");
-const bgVideo = document.getElementById("bgVideo");
 
-/* ===== SLIDE SHOW FUNCTION ===== */
 function showSlide(){
   if(index >= slides.length){
-    story.innerHTML = <div class="signature fade">— Shambhu</div>;
+    setTimeout(()=>{
+      story.innerHTML = `<div class="signature fade">— Shambhu</div>`;
+    },1200);
     return;
   }
 
   const s = slides[index];
+
   story.innerHTML = `
     <img class="photo fade" src="${s.img}" alt="">
     <div class="quote fade">${s.text}</div>
   `;
+
   index++;
   setTimeout(showSlide, 4600);
 }
 
-/* ===== TAP HANDLER (iOS SAFE) ===== */
-tapScreen.addEventListener("click", ()=>{
+function startExperience(){
   if(started) return;
   started = true;
 
   tapScreen.style.display = "none";
   content.style.display = "flex";
 
-  bgVideo.style.display = "block";
-  bgVideo.play().catch(()=>{});
-
   showSlide();
 
-  /* PARTICLES */
+  // particles
   setInterval(()=>{
     const p=document.createElement("div");
     p.className="particle";
@@ -194,7 +189,11 @@ tapScreen.addEventListener("click", ()=>{
     document.body.appendChild(p);
     setTimeout(()=>p.remove(),10000);
   },650);
-});
+}
+
+tapScreen.addEventListener("click", startExperience);
+tapScreen.addEventListener("touchstart", startExperience);
+
 </script>
 
 </body>
