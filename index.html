@@ -6,20 +6,24 @@
 <title>For Varsha ❤️</title>
 
 <style>
+/* ===== GLOBAL RESET & APPLE FONT ===== */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
   font-family:-apple-system,BlinkMacSystemFont,
-  "SF Pro Display","Helvetica Neue",Arial,sans-serif;
+  "SF Pro Display","SF Pro Text",
+  "Helvetica Neue",Arial,sans-serif;
 }
 
 html,body{
   height:100%;
   background:black;
   overflow:hidden;
+  color:white;
 }
 
+/* ===== BACKGROUND VIDEO ===== */
 video{
   position:fixed;
   inset:0;
@@ -29,6 +33,7 @@ video{
   display:none;
 }
 
+/* ===== OVERLAY ===== */
 .overlay{
   position:absolute;
   inset:0;
@@ -37,12 +42,13 @@ video{
   align-items:center;
   justify-content:center;
   text-align:center;
-  color:white;
   padding:20px;
 }
 
+/* ===== TAP SCREEN ===== */
 .tap{
-  font-size:1.8rem;
+  font-size:1.9rem;
+  letter-spacing:0.5px;
   animation:pulse 1.6s infinite;
 }
 
@@ -51,49 +57,61 @@ video{
   50%{opacity:.4}
 }
 
+/* ===== CONTENT ===== */
 .content{
   display:none;
   max-width:360px;
 }
 
+/* ===== FADE + MOTION ===== */
 .fade{
-  animation:fadeUp 2.2s ease;
+  animation:fadeUp 2.4s ease;
 }
 
 @keyframes fadeUp{
-  from{opacity:0;transform:translateY(25px)}
+  from{opacity:0;transform:translateY(28px)}
   to{opacity:1;transform:translateY(0)}
 }
 
+/* ===== PHOTO STYLE ===== */
 .photo{
-  width:220px;
-  height:220px;
-  border-radius:18px;
+  width:230px;
+  height:230px;
   object-fit:cover;
-  margin:18px auto;
-  box-shadow:0 10px 40px rgba(0,0,0,.5);
+  border-radius:22px;
+  margin:20px auto;
+  box-shadow:0 15px 45px rgba(0,0,0,.6);
+  animation:zoomIn 3.5s ease;
 }
 
+@keyframes zoomIn{
+  from{transform:scale(.9)}
+  to{transform:scale(1)}
+}
+
+/* ===== TEXT ===== */
 .quote{
-  font-size:1.15rem;
-  line-height:1.7;
-  margin:18px 0;
+  font-size:1.18rem;
+  line-height:1.75;
+  margin:20px 0;
+  letter-spacing:0.3px;
 }
 
 .signature{
-  margin-top:20px;
+  margin-top:26px;
   font-style:italic;
+  font-size:1.1rem;
   opacity:.9;
 }
 
-/* Floating light particles */
+/* ===== SPIRITUAL PARTICLES ===== */
 .particle{
   position:absolute;
   width:6px;
   height:6px;
   background:white;
   border-radius:50%;
-  opacity:.4;
+  opacity:.35;
   animation:float 10s linear infinite;
 }
 
@@ -106,26 +124,29 @@ video{
 
 <body>
 
-<video id="bgVideo" loop playsinline>
+<!-- BACKGROUND VIDEO -->
+<video id="bgVideo" loop playsinline muted>
   <source src="https://cdn.coverr.co/videos/coverr-couple-holding-hands-1576/1080p.mp4">
 </video>
 
-<!-- Tap screen -->
+<!-- TAP SCREEN -->
 <div class="overlay" id="tapScreen">
   <div class="tap">Tap anywhere ❤️</div>
 </div>
 
-<!-- Main content -->
+<!-- MAIN CONTENT -->
 <div class="overlay content" id="content">
   <div id="story"></div>
 </div>
+
 <script>
+/* ===== SLIDES DATA ===== */
 const slides = [
   { img: "varsha.jpg", text: "Some bonds don’t begin by chance — they begin by grace." },
   { img: "pic1.jpeg", text: "Thursday didn’t just happen… it aligned." },
   { img: "pic2.jpeg", text: "Every word, every silence, everything that day felt divinely timed." },
   { img: "pic3.jpeg", text: "If faith had a feeling, it would feel like you." },
-  { img: "varsha.jpg", text: "What started on a Thursday became something my soul remembers. Love You Varshu Kandhamma❤️" }
+  { img: "varsha.jpg", text: "What started on a Thursday became something my soul remembers.<br>Love you Varshu Kandhamma ❤️" }
 ];
 
 let index = 0;
@@ -136,8 +157,9 @@ const tapScreen = document.getElementById("tapScreen");
 const content = document.getElementById("content");
 const bgVideo = document.getElementById("bgVideo");
 
-function showSlide() {
-  if (index >= slides.length) {
+/* ===== SLIDE SHOW FUNCTION ===== */
+function showSlide(){
+  if(index >= slides.length){
     story.innerHTML = <div class="signature fade">— Shambhu</div>;
     return;
   }
@@ -148,11 +170,12 @@ function showSlide() {
     <div class="quote fade">${s.text}</div>
   `;
   index++;
-  setTimeout(showSlide, 4200);
+  setTimeout(showSlide, 4600);
 }
 
-tapScreen.addEventListener("click", () => {
-  if (started) return;   // prevent double tap issues
+/* ===== TAP HANDLER (iOS SAFE) ===== */
+tapScreen.addEventListener("click", ()=>{
+  if(started) return;
   started = true;
 
   tapScreen.style.display = "none";
@@ -163,14 +186,14 @@ tapScreen.addEventListener("click", () => {
 
   showSlide();
 
-  // floating particles
-  setInterval(() => {
-    const p = document.createElement("div");
-    p.className = "particle";
-    p.style.left = Math.random() * 100 + "%";
+  /* PARTICLES */
+  setInterval(()=>{
+    const p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"%";
     document.body.appendChild(p);
-    setTimeout(() => p.remove(), 10000);
-  }, 600);
+    setTimeout(()=>p.remove(),10000);
+  },650);
 });
 </script>
 
