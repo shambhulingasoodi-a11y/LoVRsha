@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Varsha ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',cursive;}
+html,body{height:100%;background:black;overflow:hidden;}
+
+video{
+  position:fixed;top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  display:none;
+}
+
+.overlay{
+  position:absolute;top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  padding:20px;
+}
+
+.content{display:none;animation:fadeIn 2.5s ease;}
+h1{font-size:2.2rem;margin-bottom:15px;}
+p{font-size:1.15rem;line-height:1.6;}
+
+img{
+  width:180px;
+  border-radius:50%;
+  margin:15px auto;
+  border:3px solid #fff;
+}
+
+.tap{
+  font-size:1.8rem;
+  animation:pulse 1.5s infinite;
+}
+
+.heart{
+  position:absolute;
+  color:#ff5a8a;
+  font-size:18px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(25px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes pulse{
+  0%,100%{opacity:1;}
+  50%{opacity:0.5;}
+}
+@keyframes float{
+  from{bottom:-10px;opacity:1;}
+  to{bottom:110%;opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Video -->
+<video id="bgVideo" loop playsinline>
+  <source src="https://cdn.coverr.co/videos/coverr-couple-holding-hands-1576/1080p.mp4">
+</video>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<!-- Tap Screen -->
+<div class="overlay" id="tapScreen">
+  <div class="tap">Tap anywhere ❤️</div>
+</div>
+
+<!-- Main Content -->
+<div class="overlay content" id="content">
+  <div>
+    <h1>Hey Varsha ❤️</h1>
+
+    <img src="varsha.jpg" alt="Varsha">
+
+    <p>
+      From the moment you came into my life,<br>
+      everything felt beautiful.<br><br>
+      You are my favorite feeling,<br>
+      my forever dream 💖
+    </p>
+
+    <p style="margin-top:15px;font-style:italic;">
+      — Yours, Shambhu
+    </p>
+  </div>
+</div>
+
+<script>
+document.body.onclick = () => {
+  document.getElementById("tapScreen").style.display="none";
+  document.getElementById("content").style.display="flex";
+  document.getElementById("bgVideo").style.display="block";
+  document.getElementById("bgVideo").play();
+  document.getElementById("music").play();
+
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.style.left=Math.random()*100+"%";
+    h.innerHTML="❤️";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },500);
+};
+</script>
+
+</body>
+</html>
